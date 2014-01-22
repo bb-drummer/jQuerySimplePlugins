@@ -8,7 +8,7 @@ content:
 	
  - popupSubmit:
 	fork from Heise's Social Media Plug-In at http://www.heise.de/extras/socialshareprivacy/
-	this one includes a "pure-DOME-non-jQuery" version of the plug-in
+	this one includes a "pure-DOM-non-jQuery" version of the plug-in
 	
  - timeSelects:
 	manages/created select elements so specify a time-value
