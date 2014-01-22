@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>jQuery.enterNoSubmit - jQuery plugin</title>
+		<script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script>
+		<script type="text/javascript" src="./jquery.enternosubmit.plugin.min.js"></script>
+		<script type="text/javascript">
+		jQuery(document).ready(function(){
+			jQuery('H2, H3').click();
+		});
+		</script>
+	</head>
+	<style>
+		BODY {
+			width		:	620px;
+		}
+		H2, H3 {
+			cursor		:	pointer;
+		}
+		H2:hover, H3:hover {
+			background	:	#d0d0d0;
+		}
+		P, UL {
+			font-size	:	14px;
+		}
+		PRE {
+			font-size	:	11px;
+			width		:	609px;
+			overflow-x	:	auto;
+			background	:	#d0d0d0;
+			padding		:	5px;
+		}
+		UL PRE {
+			width		:	527px;
+		}
+		NOSCRIPT {
+			color		:	#ff0000;
+		}
+	</style>
+	<body>
+		<h1>jQuery.enterNoSubmit - jQuery plugin</h1>
+		
+		<noscript><h2>JavaScript is disabled! You will need JavaScript to be enabled to make this work.</h2></noscript>
+		<p>
+			a simple plug-in, intended to prevent submitting a form when hitting the "enter" key
+			<ul>
+				<li>if focused on some input element the plug-in will apply directly on this element</li>
+				<li>if focused on any other element (eg: form, div, p,...) the plug-in will try to select all 
+				(input) elements inside this element and apply itself on each of them, default: '<b>INPUT[type=text]</b>';
+				set <b>applyOnSelf</b> to <b>true</b> to let it also invoke on the element itself.
+				</li>
+				<li>triggers on one of these DOM key events:  '<b>down</b>', '<b>up</b>' or '<b>press</b>', default: '<b>down</b>' </li>
+				<li>you can provide a callback, which is triggered after event propagation has stopped</li>
+			</ul>
+		</p>
+		<h2 onclick="jQuery(this).toggleClass('closed').next().toggle();" title="click to expand/collapse">Usage :</h2>
+		<pre>
+&lt;script type="text/javascript" src="/path/to/jquery-1.4.2.min.js">&lt;/script>
+&lt;script type="text/javascript" src="/path/to/jquery.enternosubmit.plugin.min.js">&lt;/script>
+
+...
+
+&lt;script>
+jQuery(document).ready(function(){
+
+    // default configuration: &lt;input class="otherinput" /> or &lt;any class="otherinput">...&lt;input type="text" />...&lt;/any>, key-down, no callback
+    jQuery('.otherinput').enterNoSubmit();
+
+    // default configuration: &lt;form class="myform">...&lt;input type="text" />...&lt;/form>, key-down, no callback
+    jQuery('FORM.myForm').enterNoSubmit();
+
+    // custom configuration
+    jQuery('#eForm UL').enterNoSubmit({
+    
+        // the key's event which triggers submitting prevention: 'down', 'up' or 'press', default: 'down' 
+        keyevent    :    'press',
+        
+        // supposed to be your custom function triggered when submitting is prevented
+        callback    :    function (oEvent) {
+            console.debug(this); console.debug(oEvent);
+        },
+        
+        // selector for any elements inside any other element this plug-in is applied on and provides DOM key events, default: 'INPUT[type=text]'
+        inputs      :    '.input1',
+        
+        // set to true to let the plug-in also invoke on the element itself if it is not an input element
+        applyOnSelf :    false
+    });
+
+});
+&lt;/script>
+		</pre>
+		<h2 onclick="jQuery(this).toggleClass('closed').next().toggle();" title="click to expand/collapse">Examples :</h2>
+		<div>
+		<ol><li>
+			<ul>
+				<li>
+					<form id="eForm" class="popupsubmit" action="." method="post">
+						<fieldset>
+							<ul>
+								<li>
+									<label>Value 1: </label>
+									<input class="textinput input1" type="text" name="value1" value="" />
+								</li>
+								<li>
+									<label>Value 2: </label>
+									<input class="textinput input2" type="text" name="value2" value="" />
+								</li>
+								<li>
+									<input type="submit" name="submitBtn" />
+								</li>
+							</ul>
+						</fieldset>
+					</form>
+					<script>
+					jQuery(document).ready(function(){
+					    jQuery('#eForm UL').enterNoSubmit({
+					        keyevent	:	'press',
+					        callback	:	function (oEvent) { console.debug(this); console.debug(oEvent); },
+					        inputs		:	'.input1'
+					    });
+					});
+					</script>
+				</li>
+				<li>
+					<h3 onclick="jQuery(this).toggleClass('closed').next().toggle();" title="click to expand/collapse">Example code :</h3>
+					<pre>
+&lt;script>
+jQuery(document).ready(function(){
+    jQuery('#eForm UL').enterNoSubmit({
+        keyevent : 'press',
+        callback : function (oEvent) {
+            console.debug(this); console.debug(oEvent);
+        },
+        inputs   : '.input1'
+    });
+});
+&lt;/script>
+					</pre>
+				</li>
+			</ul>
+		</li><li>
+			<ul>
+				<li>
+					<form method="post">
+						<fieldset>
+							<ul>
+								<li>
+									<label>search: </label>
+									<input class="otherinput" type="text" name="q" value="search" />
+								</li>
+								<li>
+									<input type="submit" name="submitBtn" value="search" /> 
+								</li>
+							</ul>
+						</fieldset>
+					</form>
+					<script>
+					jQuery(document).ready(function(){
+					    jQuery('.otherinput').enterNoSubmit();
+					});
+					</script>
+				</li>
+				<li>
+					<h3 onclick="jQuery(this).toggleClass('closed').next().toggle();" title="click to expand/collapse">Example code :</h3>
+					<pre>
+&lt;script>
+jQuery(document).ready(function(){
+    jQuery('.otherinput').enterNoSubmit();
+});
+&lt;/script>
+					</pre>
+				</li>
+			</ul>
+		</li></ol>
+		</div>
+		<h2 onclick="jQuery(this).toggleClass('closed').next().toggle();" title="click to expand/collapse">Download :</h2>
+		<div>
+			<ul>
+				<li>uncompressed source file: <a href="./jquery.enternosubmit.plugin.js">jquery.enternosubmit.plugin.js</a> [5.9 kb]</li>
+				<li>compressed file: <a href="./jquery.enternosubmit.plugin.min.js">jquery.enternosubmit.plugin.min.js</a> [2.1 kb]</li>
+				<li>archive file including this example page: <a href="./jquery.enternosubmit.plugin.1.0.zip">jquery.enternosubmit.plugin.1.0.zip</a> [5.1 kb]</li>
+			</ul>
+		</div>
+		<hr />
+		<p>
+			&copy; 2009 Bj&ouml;rn Bartels [http://dragon-projects.net, info@dragon-projects.net]
+		</p>
+	</body>
+</html>

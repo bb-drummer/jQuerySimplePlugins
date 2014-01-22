@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>popupSubmit - jQuery Plugin</title>
+		<script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script>
+		<script type="text/javascript" src="./jquery.popupsubmit.plugin.js"></script>
+		<script>
+		jQuery(document).ready(function(){
+			jQuery('.popupsubmit').popupSubmit();
+		});
+		</script>
+	</head>
+	<body>
+		<ul>
+			<li>
+				<form id="ePopupForm" class="popupsubmit" action="../popupSubmit/target.php" method="post">
+					<fieldset>
+						<ul>
+							<li>
+								<label>Value 1: </label>
+								<input type="text" name="value1" value="" />
+							</li>
+							<li>
+								<label>Value 2: </label>
+								<input type="text" name="value2" value="" />
+							</li>
+							<li>
+								<input type="submit" name="submitBtn" />
+							</li>
+							<li>
+								<a class="popuptrigger" href="#">click to submit detected form in popUp</a> 
+							</li>
+							<li>
+								<a class="popuptrigger" href="othertarget.php">click to submit detected form to another target url in popUp</a> 
+							</li>
+						</ul>
+					</fieldset>
+				</form>
+			</li>
+			<li>
+				<p>
+					<a class="popupsubmit" href="../popupSubmit/index.html">open link in popUp</a> 
+				</p>
+			</li>
+			<li>
+				<p>
+					<a class="popupsubmit" rel="#ePopupForm" href="#">click to submit the form in popUp</a> 
+				</p>
+			</li>
+			<li>
+				<form id="ePopupSearch" method="post">
+					<fieldset>
+						<ul>
+							<li>
+								<label>search: </label>
+								<input type="text" name="q" value="search" />
+							</li>
+							<li>
+								<a class="popuptrigger" href="http://www.google.com" target="mySearch">click to submit detected form/action to another target url in popUp</a> 
+							</li>
+						</ul>
+					</fieldset>
+				</form>
+			</li>
+		</ul>
+	</body>
+</html>
